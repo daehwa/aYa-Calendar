@@ -44,7 +44,7 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
 
         FloatingActionButton findTime = (FloatingActionButton) findViewById(R.id.add_time_for_all);
         findTime.attachToListView(listTimeSlot);
-        //nameOfSchedule = (EditText)findViewById(R.id.name_of_schedule);
+        nameOfSchedule = (EditText)findViewById(R.id.name_of_schedule);
 
         Intent intent = getIntent();
         String[] checked = intent.getStringArrayExtra("checked");
@@ -55,21 +55,39 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
             public void onClick(View v){
                 String name;
                 name=nameOfSchedule.getText().toString();
-                if(name!="") {
-                    int isChecked = listTimeSlot.getId();
-                    String selectedTitle = items.get(0);
-                    selectedTitle = selectedTitle.replaceAll("\\D+", "::");
-                    selectedTitle += name;
-                    try {
-                        OutputStream os=openFileOutput("aYaUserData.txt", Context.MODE_APPEND);
-                        BufferedWriter bOut = new BufferedWriter(new OutputStreamWriter(os));
-                        bOut.write(selectedTitle);
-                        Toast.makeText(getApplicationContext(),"일정이 저장되었습니다",Toast.LENGTH_SHORT).show();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                System.out.println("name: "+name);
+                String selectedTitle;
+                if(!name.isEmpty()) {
+                    int isChecked = listTimeSlot.getCheckedItemPosition();
+                    if(listTimeSlot.isItemChecked(isChecked)) {
+                        selectedTitle = items.get(isChecked);
+                        selectedTitle = selectedTitle.replaceAll("\\D+", "::");
+                        System.out.println(selectedTitle);
+                        if(selectedTitle.length()==12||selectedTitle.length()==13||selectedTitle.length()==14){Toast.makeText(getApplicationContext(), "이 일정은 추가할 수 없습니다", Toast.LENGTH_SHORT).show();}
+                        else {
+                            selectedTitle += name;
+                            try {
+                                OutputStream os = openFileOutput("aYaUserData.txt", Context.MODE_APPEND);
+                                BufferedWriter bOut = new BufferedWriter(new OutputStreamWriter(os));
+                                bOut.write(selectedTitle+"\r\n");
+                                bOut.close();
+                                Toast.makeText(getApplicationContext(), "일정이 저장되었습니다", Toast.LENGTH_SHORT).show();
+
+                                //화면옮긺
+                                Intent intent=new Intent(TimeSlotPrintActivity.this,homeActivity.class);
+                                startActivity(intent);
+                                //이전 종료
+                                homeActivity aActivity = (homeActivity) homeActivity.AActivity;
+                                aActivity.finish();
+                                finish();
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
+                    else{Toast.makeText(getApplicationContext(),"일정을 선택해주세요",Toast.LENGTH_SHORT).show();}
                 }
                 else{Toast.makeText(getApplicationContext(),"일정 이름을 입력하세요",Toast.LENGTH_SHORT).show();}
             }
@@ -94,6 +112,7 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
 
     public void findTimeForALL(String[] checked, int[] num) {
         personSchedule[] person = new personSchedule[checked.length];
+        System.out.println("길이길이: "+checked.length);
         for(int i=0;i<checked.length;i++)
             person[i]=new personSchedule();
         int i = -1;
@@ -119,7 +138,7 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
         }
             //몇일을 계산할건지(윤년도 고려완료~)
             int Y = num[0], M = num[1], D = num[2], days = 0;
-            int date = (num[0] + ((num[1] + 1) * 26) / 10 + num[0] % 100 + (num[0] % 100) / 4 + num[0] / 400 - 2 * num[0] / 100 + 1) % 7;
+            int date = (num[2] + ((num[1] + 1) * 26) / 10 + num[0] % 100 + (num[0] % 100) / 4 + num[0] / 400 - 2 * num[0] / 100 + 5) % 7;
             System.out.println("date: "+date);
             while (num[0] != num[3]) {
                 if (num[0] % 4 == 0 && num[0] % 400 != 0)
@@ -130,11 +149,11 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
             }
             num[0] = Y;
             while (num[1] != num[4]) {
-                if (num[1] == 2 && num[0] % 4 == 0 && num[0] % 400 != 0)
+                if (num[1] == 2 && (Y%4==0&&Y%100!=0||Y%400==0))
                     days += 29;
-                else if (num[1] == 2)
+                else if (Y == 2)
                     days += 28;
-                else if ((num[1] % 2 == 0 && num[1] < 7) || (num[1] % 2 == 1 && num[1] > 7))
+                else if ((M % 2 == 0 && M < 7) || (M % 2 == 1 &&M > 7))
                     days += 30;
                 else
                     days += 31;
@@ -165,7 +184,7 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
                         }
                         else
                             for(k=0;k<3;k++)
-                            {person[i].day[j][k]=Integer.valueOf(data[k]);System.out.println("day를 저장하는 j"+j+data[k]);}
+                                person[i].day[j][k]=Integer.valueOf(data[k]);
                         person[i].time1[j][0]=Integer.valueOf(data[k]); k++; person[i].time1[j][1]=Integer.valueOf(data[k]); k++;
                         person[i].time2[j][0]=Integer.valueOf(data[k]); k++; person[i].time2[j][1]=Integer.valueOf(data[k]); k++;
                         person[i].why[j]=data[k];
@@ -192,15 +211,13 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
                 int t,n=1,cnt=0,lastday=0,lastyear;
                 for(i=0;i<checked.length;i++){
                     for(int j=0;j<person[i].why.length;j++){
-                        if(M==2&&Y%4==0&&Y%400!=0) lastday=28;
-                        else if(M==2) lastday=29;
+                        if(M==2&&(Y%4==0&&Y%100!=0||Y%400==0)) lastday=29;
+                        else if(M==2) lastday=28;
                         else if(M%2==0&&M<7||M%2==1&&M>7) lastday=30;
                         else lastday=31;
 
                         if(Y%4==0&&Y%400!=0) lastyear=366;
                         else lastyear=365;
-                        System.out.println(person[i].day[j][0]+" "+Y+" "+person[i].day[j][1]+" "+M+" "+person[i].day[j][2]+" "+D);
-                        System.out.println("day를 time에 넣는 j"+j);
                         if(person[i].day[j][0]==Y&&person[i].day[j][1]==M&&person[i].day[j][2]==D)
                         {
                             time1[cnt][0]=person[i].time1[j][0];
@@ -276,6 +293,7 @@ public class TimeSlotPrintActivity extends AppCompatActivity {
                 //이제 출력!!
                 boolean flag=false;
                 String title=Y+"년 "+M+"월 "+D+"일";
+                System.out.println("year: "+Y);
                 if(Time1[n][0]==0&&Time1[n][1]==0&&Time2[n][0]==23&&Time2[n][1]==59)
                     title+="\r\n가능한 시간이 없습니다";
                 else if(cnt==0)

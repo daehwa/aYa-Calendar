@@ -1,7 +1,5 @@
 package com.borax12.materialdaterangepickerexample;
 
-import android.widget.LinearLayout;
-
 import java.text.Collator;
 import java.util.Comparator;
 
@@ -15,7 +13,6 @@ public class ListData {
     public String endHour;
     public String endMin;
     public String memo;
-    public LinearLayout timeSlot;
 
     public static final Comparator<ListData> NUM_COMPARATOR = new Comparator<ListData>() {
         private final Collator sCollator = Collator.getInstance();

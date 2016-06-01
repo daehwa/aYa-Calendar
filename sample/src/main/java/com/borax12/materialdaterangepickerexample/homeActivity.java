@@ -3,6 +3,7 @@ package com.borax12.materialdaterangepickerexample;
 /**
  * Created by snote on 2016-05-23.
  */
+import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +14,12 @@ import android.widget.TabHost;
  */
 @SuppressWarnings("deprecation")
 public class homeActivity extends TabActivity{
+    public static Activity AActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        AActivity=homeActivity.this;
 
         TabHost mTab = getTabHost();
         mTab.addTab(mTab.newTabSpec("DateTab")

@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.borax12.materialdaterangepicker.floatingactionbutton.FloatingActionButton;
 import com.borax12.materialdaterangepicker.time.RadialPickerLayout;
@@ -26,6 +28,7 @@ public class TimeSlotActivity extends AppCompatActivity implements
     ArrayList<String> items;
     ArrayAdapter<String> adapter;
     ListView listFriends;
+    ImageButton trashCan;
     int [] num=new int [6];
     boolean flag=false;
 
@@ -39,11 +42,10 @@ public class TimeSlotActivity extends AppCompatActivity implements
         listFriends=(ListView)findViewById(R.id.friends);
         listFriends.setAdapter(adapter);
         listFriends.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
         Button dateSelect=(Button)findViewById(R.id.dateSelect);
         FloatingActionButton findTime = (FloatingActionButton) findViewById(R.id.findTime);
         findTime.attachToListView(listFriends);
-
+        trashCan=(ImageButton) findViewById(R.id.trashcan);
 
         //list 생성
         final String [] title=getTitleList();
@@ -65,6 +67,26 @@ public class TimeSlotActivity extends AppCompatActivity implements
                     dpd.show(getFragmentManager(), "Datepickerdialog");
             }
         });
+        //파일삭제버튼
+        trashCan.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                long []isChecked=listFriends.getCheckItemIds();
+                if(isChecked.length==0)
+                    Toast.makeText(TimeSlotActivity.this, "사람을 선택해주세요", Toast.LENGTH_SHORT).show();
+                else {
+                    File file;
+                    for (int i = 0; i < isChecked.length; i++) {
+                        file = new File(getFilesDir().getAbsolutePath() + "/" + title[(int) isChecked[i]]);
+                        file.delete();
+                    }
+                    Toast.makeText(TimeSlotActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(TimeSlotActivity.this, homeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
 
         //찾기
         findTime.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +94,12 @@ public class TimeSlotActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 Intent intent = new Intent(TimeSlotActivity.this, TimeSlotPrintActivity.class);
                 long []isChecked=listFriends.getCheckItemIds();
-                final String[] checked =new String[title.length];
-                int n=0;
-                for(int i=0;i<title.length;i++)
-                    if(isChecked.length>0) {
-                        checked[n] = title[(int)isChecked[i]];
-                        n++;
-                    }
+                final String[] checked =new String[isChecked.length];
+                
+                for(int i=0;i<isChecked.length;i++)
+                {
+                    checked[i] = title[(int)isChecked[i]];
+                }
                 intent.putExtra("checked",checked);
                 if(isChecked.length>0) {
                     intent.putExtra("num",num);

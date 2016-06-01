@@ -20,9 +20,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal">
-                    <include
-                        android:id="@+id/calendar"
-                        layout="@layout/mdtp_date_picker_view_animator" />
+                    <com.imanoweb.calendarview.CustomCalendarView
+                        android:id="@+id/calendar_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff">
+                    </com.imanoweb.calendarview.CustomCalendarView>
                     <ListView
                         android:id="@+id/mListView"
                         android:layout_width="fill_parent"

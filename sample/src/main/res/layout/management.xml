@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#764c24"
-        android:elevation="5dp">
+        android:layout_height="fill_parent"
+        android:gravity="center">
         <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:hint="이름"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffdabf9c"
-        android:background="@android:color/transparent"/>
+            android:id="@+id/schedule_friend"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:hint="여기를 길게 클릭하여\n친구일정넣기"
+            android:textColorHint="#764c24"
+            android:textSize="15sp"
+            android:inputType="textVisiblePassword"
+            android:gravity="center"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:background="#764c24"
+        android:elevation="5dp"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:hint="이름"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:inputType="textShortMessage|textVisiblePassword"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffdabf9c"
+            android:layout_weight="4"
+            android:background="@android:color/transparent"/>
+        <Button
+            android:id="@+id/add_friend"
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="추가"
+            android:layout_marginRight="10dp"
+            android:textSize="15sp"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:padding="2dp"
+            android:background="#ff308dd2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/kakao_message"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/kakao_logo"
+            android:layout_gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="사용법"
-            android:textSize="18sp"
+            android:text="카톡으로 보내기"
+            android:textSize="9sp"
             android:textColor="#402a13"/>
-        </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
+</FrameLayout>

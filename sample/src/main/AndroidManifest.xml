@@ -13,6 +13,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="@string/kakao_scheme" android:host="@string/kakaolink_host" />
+            </intent-filter>
         </activity>
         <activity android:name=".homeActivity"
             android:label="aYa Calendar"/>
@@ -23,10 +29,12 @@
         <activity android:name=".TimeSlotActivity"
             android:label="시간찾기"/>
         <activity android:name=".ManageActivity"
-            android:label="프로필"/>
+            android:label="보내기/친구추가"/>
         <activity android:name=".TimeSlotPrintActivity"
             android:label="공강시간"/>
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key" />
     </application>
 
 </manifest>
