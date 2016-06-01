@@ -6,15 +6,15 @@
 ![Alt text](/screenshot/memo_schedule.jpg)
 ######memo schedule
 ![Alt text](/screenshot/date_schedule.jpg)
-######date or day schedule
+######day of week or date schedule
 ![Alt text](/screenshot/delete_schedule.jpg)
 ######delete schedule
 ![Alt text](/screenshot/add_schedule.jpg)
 ######add schedule
 ![Alt text](/screenshot/add_schedule_date.jpg)
-######add schedule date
+######add schedule day of week
 ![Alt text](/screenshot/select day.jpg)
-######select day
+######select date
 ![Alt text](/screenshot/select_time.jpg)
 ######select time
 ![Alt text](/screenshot/friend.jpg)
