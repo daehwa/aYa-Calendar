@@ -6,7 +6,7 @@ This is for assignment (final project : make your own program using oop concepts
 Thanks for prof. Sungahn Ko giving great chance and teaching
 
 
-aYa is am abbreviation of __'are You available?'__. The icon has a shape of coffee cup when we see it from above. This looks like alphabet _'a'_. The clock hands looks like alphabet _'Y'_. We designed this application in this way. Thanks for my freind Bae Euibin, we major in Human Factor Engineering. Also Thanks for Kim Yunju.
+aYa is am abbreviation of __'are You available?'__. The icon has a shape of coffee cup when we see it from above. This looks like alphabet _'a'_. The clock hands looks like alphabet _'Y'_. We designed this application in this way. Thanks for my friend Bae Euibin, we major in Human Factor Engineering. Also Thanks for Kim Yunju.
 
 
 
@@ -48,7 +48,7 @@ add schedule for day of week one
 
 ## select day
 
-![select_day](./screenshot/select_day.jpg)
+![select_day](./screenshot/select day.jpg)
 
 select date
 
