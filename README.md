@@ -1,7 +1,10 @@
 # aYa-Calendar
 This application find common empty time list among many people
+
 This is for assignment (final project : make your own program using oop concepts). I made this application using JAVA
+
 Thanks for prof. Sungahn Ko giving great chance and teaching
+
 
 
 ### Splash
