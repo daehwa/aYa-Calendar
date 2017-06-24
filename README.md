@@ -1,5 +1,10 @@
 # aYa-Calendar
-This application find common empty time list among many people
+###This application find common empty time list among many people
+###This is for assignment (final project : make your own program using oop concepts). I made this application using JAVA
+###Thanks for prof.Sungahn Ko
+
+
+
 ![splash](./screenshot/splash.jpg)
 
 splash screen
@@ -30,7 +35,7 @@ add schedule
 add schedule for day of week one
 
 
-![select day](./screenshot/select day.jpg)
+![select day](./screenshot/select_day.jpg)
 
 select date
 
