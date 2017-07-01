@@ -9,6 +9,9 @@ Thanks for prof. Sungahn Ko giving great chance and teaching
 aYa is am abbreviation of __'are You available?'__. The icon has a shape of coffee cup when we see it from above. This looks like alphabet _'a'_. The clock hands looks like alphabet _'Y'_. We designed this application in this way. Thanks for my friend Bae Euibin, we major in Human Factor Engineering. Also Thanks for Kim Yunju.
 
 
+Here's a video to help your understanding on [Youtube](https://www.youtube.com/watch?v=ODBRnbdxftY)
+
+
 
 ## Splash
 
